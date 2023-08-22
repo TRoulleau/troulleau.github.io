@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+      <!-- <a href="index.html" class="logo"><img src="https://cdn.discordapp.com/emojis/1072469904608989284.webp?size=240&quality=lossless"></a>
+      <a href="index.html" class="header-text"></a> -->
+    </header>
+
+    <div id="menu">
+        <div id="menu-items">
+          <div class="menu-item" href="index.html">
+            <a>Infos STAR</a>
+            <a class="explications">Site d'information sur les métros de Rennes en direct</a>
+          </div>
+          <div class="menu-item" href="index.html">
+            <a>EDT</a>
+            <a class="explications">Site d'affichage des emplois du temps des salles de l'Université de Rennes</a>
+          </div>
+        </div>
+    </div>
+
+
+
+
+    <div id="menu-share">
+      <img src="https://cdn-icons-png.flaticon.com/512/929/929539.png" alt="Partager" class="menu-share-icon">
+    </div>
+    <div id="menu-share-open">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Solid_white_bordered.svg/600px-Solid_white_bordered.svg.png" alt="Menu Share">
+    </div>
+
+    <style>
+        #menu-share-open {
+            display: none;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 100000;
+      }
+    </style>
+      
+
+    <script>
+        const Share = document.getElementById('menu-share');
+        const ShareMenu = document.getElementById('menu-share-open');
+        let menuOpen = false;
+        Share.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            if (menuOpen) {
+                ShareMenu.style.display = 'block';
+                console.log('Menu ouvert!');
+            } else {
+                ShareMenu.style.display = 'none';
+                console.log('Menu fermé!');
+            }
+        });</script>
+</body>
+</html>
