@@ -1,9 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.0/paper-full.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        html, body {
+            overflow:hidden;
+          }
+          
+          canvas{
+              width: 100vw;
+              height: 100vh;
+              pointer-events: none;
+              z-index: 1;
+              background-color: transparent;
+              position: absolute;
+              top: 0;
+              opacity: 1;
+              -webkit-user-drag: none; 
+              user-select: none; 
+              -webkit-tap-highlight-color: 
+              rgba(0, 0, 0, 0); 
+          
+          }
+    </style>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2285%22>👨‍💻</text></svg>">
+    <title>Accueil - Tom ROULLEAU</title>
 
 </head>
 
 <body>
-    <h1>Ceci est un site de test</h1>
-    <h2>Normalement tout marche très bien</h2>
-    <button onclick="window.location.href = './quantum.html';">Cliquez Ici</button>
+    <canvas id="canvas"></canvas>
+    <script>
+        
+        paper.install(window);
+        
+        var tool1, tool2;
+        var word = "Tom ROULLEAU     ";
+        
+        function init() {
+        
+          paper.setup('canvas');
+        
+          var path = new Path();
+          var points = word.length;
+          var length = word.length;
+          var vw = $(window).width()/100;
+        
+          var createPointText = function(str, style) {
+              var text = new PointText();
+              text.content = str;
+              text.fillColor = '#000000';
+              if (style) {
+                  if (style.font) text.font = style.font;
+                  if (style.fontFamily) text.fontFamily = style.fontFamily;
+                  if (style.fontSize) text.fontSize = style.fontSize;
+                  if (style.fontWeight) text.fontWeight = style.fontWeight;
+              }
+              return text;
+          }
+        
+          var start = new paper.Point(Math.random()*100,Math.random()*100);
+          for(var i = 0; i < points; i++) {
+            path.add(new paper.Point(i * length + start.x, 0 + start.y));
+            path.smooth();
+          }
+        
+          var createAlignedText = function(str, path, style) {
+              if (str && str.length > 0 && path) {
+                  // create PointText object for each glyph
+                  var glyphTexts = [];
+                  for (var i = 0; i < str.length; i++) {
+                      glyphTexts[i] = createPointText(str.substring(i, i+1), style);
+                      glyphTexts[i].justification = "center";
+                  }
+                  // for each glyph find center xOffset
+                  var xOffsets = [0];
+                  for (var i = 1; i < str.length; i++) {
+                      var pairText = createPointText(str.substring(i - 1, i + 1), style);
+                      pairText.remove();
+                      xOffsets[i] = xOffsets[i - 1] + pairText.bounds.width -
+                          glyphTexts[i - 1].bounds.width / 2 - glyphTexts[i].bounds.width / 2;
+                  }
+                  // set point for each glyph and rotate glyph aorund the point
+                  for (var i = 0; i < str.length; i++) {
+                      var centerOffs = xOffsets[i];
+                      if (path.length < centerOffs) {
+                          if (path.closed) {
+                              centerOffs = centerOffs % path.length;
+                          }  else {
+                              centerOffs = undefined;
+                          }
+                      }
+                      if (centerOffs === undefined) {
+                          glyphTexts[i].remove();
+                      } else {
+                          var pathPoint = path.getPointAt(centerOffs);
+                          glyphTexts[i].point = pathPoint;
+                          var tan = path.getTangentAt(centerOffs);
+                          glyphTexts[i].rotate(tan.angle, pathPoint);
+                      }
+                  }
+              }
+          }
+        
+          tool1 = new Tool();
+          tool1.onMouseMove = function(event) {
+            project.clear();
+            var x, y;
+            path.firstSegment.point = event.point;
+            for (var i = 0; i < points - 1; i++) {
+                var segment = path.segments[i];
+                var nextSegment = segment.next;
+                var vector = new paper.Point(segment.point.x - nextSegment.point.x,segment.point.y - nextSegment.point.y);
+                vector.length = length;
+                nextSegment.point = new paper.Point(segment.point.x - vector.x,segment.point.y - vector.y);
+            }
+        
+            path.smooth();
+            path.strokeColor = 'black';
+            path.smooth({ type: 'continuous' });
+        
+              if($(window).width() <= 900 ){
+                createAlignedText(word, path, {
+                  fontSize: vw*7,
+                  fontFamily: 'Poppins'
+                });
+              } else {
+                createAlignedText(word, path, {
+                  fontSize: vw*2,
+                  fontFamily: 'Poppins'
+                });
+              }
+        
+            path.fullySelected = true;
+        
+          }
+        
+          tool2 = new Tool();
+          tool2.onMouseMove = function(event) {
+        
+            var path = new Path.Circle(new Point(event.point, event.point), 20);
+            view.onFrame = function(event) {
+              project.clear();
+              createAlignedText("LOADING", path, {
+                fontSize: vw*2,
+                fontFamily: 'Arial'
+              });
+              path.rotate(5);
+            }
+        
+          }
+        
+        }
+            
+        
+        init();
+        tool1.activate();
+            </script>
+
+    <div class="header-menu">
+        <ul>
+            <li><a class="active" href="#">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="about.html">About Me</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>   
+    </div>
 </body>
+</html>
