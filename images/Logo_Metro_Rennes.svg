@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="200"
+   height="200"
+   viewBox="0 0 199.99999 199.99999"
+   id="svg5082"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="Logo Metro Rennes.svg">
+  <defs
+     id="defs5084" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="52.254986"
+     inkscape:cy="149.91997"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer2"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:snap-grids="true"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:snap-page="true"
+     showborder="true"
+     units="px"
+     inkscape:showpageshadow="true" />
+  <metadata
+     id="metadata5087">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Calque 2">
+    <rect
+       transform="translate(0,-852.36233)"
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:5.70300007;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect8037"
+       width="146.97719"
+       height="119.198"
+       x="27.274128"
+       y="893.26324"
+       rx="14.1732"
+       ry="14.1732" />
+  </g>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-852.36223)">
+    <path
+       inkscape:connector-curvature="0"
+       id="path4138"
+       style="fill:#2b4794;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       d="m 169.2864,907.70424 0,10.32505 0,85.96001 c 0,3.6468 -5.36736,5.6132 -10.65282,5.6132 -5.36738,0 -10.77574,-1.9664 -10.77574,-5.6132 l 0,-84.68987 c -18.02785,-8.07156 -33.22862,-1.96668 -37.03904,-0.0819 l 0,84.77177 c 0,3.6467 -5.36741,5.6132 -10.65284,5.6132 -5.367385,0 -10.775715,-1.9665 -10.775715,-5.6132 l 0,-84.68984 c -18.02784,-8.07156 -33.14668,-1.96668 -36.9571,-0.0819 l 0,84.77184 c 0,3.6467 -5.40837,5.6132 -10.69379,5.6132 -5.32644,0 -10.73475,-1.9664 -10.73475,-5.6132 l 0,-96.28509 0,-1.14721 1.02429,-0.53266 c 29.0904,-16.34799 55.06687,-10.1202 68.382905,-4.67086 37.32585,-15.20076 67.72737,4.54794 68.01418,4.7528 l 0.86042,0.61459 0,0.98334 z m -69.12044,-55.06691 c -55.148815,0 -99.8906747,44.70089 -99.8906747,99.9317 0,55.18997 44.7418597,99.84977 99.8906747,99.84977 55.14885,0 99.89069,-44.6598 99.89069,-99.84977 0,-55.23081 -44.74184,-99.9317 -99.89069,-99.9317" />
+  </g>
+</svg>
