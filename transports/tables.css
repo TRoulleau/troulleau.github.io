@@ -1,0 +1,77 @@
+/* Tables pour les fichiers d'arrêts particuliers */
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 5px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #e5dec2;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.styled-table tbody tr:hover {
+    color: #017c63;
+    border: 1.2px solid #000000;
+}
+
+/* Table pour l'accueil */
+
+.beaulieu-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.beaulieu-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.beaulieu-table th,
+.beaulieu-table td {
+    padding: 5px 15px;
+}
+
+.beaulieu-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.beaulieu-table tbody tr:nth-of-type(even) {
+    background-color: #e5dec2;
+}
+
+.beaulieu-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.beaulieu-table tbody tr:hover {
+    color: #017c63;
+    border: 1.2px solid #000000;
+}

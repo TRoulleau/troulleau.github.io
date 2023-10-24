@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil</title>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/d/df/Logo_Metro_Rennes.svg" />
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="tables.css">
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <script> //Information des lignes de métro
+        function refreshMetroInfo() {
+            // Appel à l'API
+            $.getJSON('https://data.explore.star.fr/api/records/1.0/search/?dataset=tco-metro-lignes-etat-tr&q=&facet=nomcourt&facet=etat&timezone=Europe%2FParis', function(data) {
+                var records = data.records;
+        
+                // Effacer les informations précédentes
+                $('#metro-info').empty();
+        
+                // Parcourir chaque enregistrement et afficher les informations
+                records.forEach(function(record) {
+                    var nomcourt = record.fields.nomcourt;
+                    var etat = record.fields.etat;
+                    var date = record.fields.lastupdate;
+                    //décodage de la date et l'heure afin de les rendre plus lisibles
+                    var date = date.split('+')[0].split('T');var time=date[1].split(':');var date=date[0].split('-');var year=date[0];var month=date[1];var day=date[2];var hour=time[0];var minute=time[1];var second=time[2];var date=day+'/'+month+'/'+year+' '+hour+':'+minute+':'+second;
+                    var lastUpdate = date;
+                    
+                    if (nomcourt === "a") {
+                        lienimg = './images/metro/1001_300_2022-01-21.png';
+                    } else if (nomcourt === "b") {
+                        lienimg = './images/metro/1002_300_2022-01-21.png';
+                    }
+
+                    if (etat === "OK") {
+                        etat = "✅";
+                    } else if (etat === "En panne") {
+                        etat = "❌";
+                    }
+
+                    var ligneInfo = $('<tr>').append(
+                        $('<td>').append($('<img>').attr('src', lienimg).attr('class', 'metro-img').attr('alt', 'Ligne '+nomcourt)),
+                        $('<td>').text(etat),
+                        $('<td>').text(lastUpdate),
+                        );
+
+                    // Ajouter l'élément au tableau
+                    $('#metro-info').append(ligneInfo);
+                });
+            });
+        }    
+    </script>
+
+    <script> //Information des prochains métros à Beaulieu
+        function refreshBeaulieuInfo() {
+          $.ajax({
+            url: 'https://data.explore.star.fr/api/records/1.0/search/?dataset=tco-metro-circulation-deux-prochains-passages-tr&q=&facet=idligne&facet=nomcourtligne&facet=sens&facet=idarret&facet=nomarret&facet=idfirsttrain&refine.nomarret=Beaulieu%20-%20Universit%C3%A9&timezone=Europe%2FParis',
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+              var records = data.records;
+      
+              // Effacer les informations précédentes
+              $('#beaulieu-info').empty();
+      
+              if (records.length === 0) {
+                $('#beaulieu-info').append('<tr><td colspan="6">Pas de données disponibles</td></tr>');
+              } else {
+                records.forEach(function(record) {
+                  // Parcourir chaque enregistrement et afficher les informations
+                  var arriveefirsttrain = record.fields.arriveefirsttrain;
+                  var departfirsttrain = record.fields.departfirsttrain;
+                  var arriveesecondtrain = record.fields.arriveesecondtrain;
+                  var departsecondtrain = record.fields.departsecondtrain;
+                  var nomarret = record.fields.nomarret;
+                  var destination = record.fields.destination;
+      
+                  // Créer une nouvelle ligne dans le tableau pour chaque enregistrement
+                  var row = $('<tr>').append(
+                    $('<td>').text(nomarret),
+                    $('<td>').text(destination),
+                    $('<td>').text(arriveefirsttrain),
+                    $('<td>').text(departfirsttrain),
+                    $('<td>').text(arriveesecondtrain),
+                    $('<td>').text(departsecondtrain)
+                  );
+      
+                  // Ajouter la ligne au tableau
+                  $('#beaulieu-info').append(row);
+                });
+              }
+            },
+          });
+        }
+      </script>
+
+    <script> //Heure de la dernière mise à jour
+        function updatehour(){
+            var date = new Date();
+            var hour = date.getHours().toString().padStart(2, "0");
+            var minutes = date.getMinutes().toString().padStart(2, "0");
+            var seconds = date.getSeconds().toString().padStart(2, "0");
+            var fullHour = hour + ":" + minutes + ":" + seconds;
+            document.getElementById("last-update").textContent = fullHour;
+        }
+    </script>
+
+    <script> //Heure actuelle
+        function afficherHeure() {
+            var date = new Date();
+            var heure = date.getHours().toString().padStart(2, "0");
+            var minutes = date.getMinutes().toString().padStart(2, "0");
+            var secondes = date.getSeconds().toString().padStart(2, "0");
+    
+            var heureActuelle = heure + ":" + minutes + ":" + secondes;
+    
+            document.getElementById("heure").textContent = heureActuelle;
+        }
+    
+        setInterval(afficherHeure, 100); // Actualise l'heure toutes les secondes
+    </script>
+
+    <script> //Premier chargement de la page
+        $(document).ready(function() {
+            refreshMetroInfo();
+            refreshBeaulieuInfo();
+            updatehour();
+        });
+    </script>
+    
+</head>
+
+<body>
+    <header class="align-items-center">
+        <a href="#" class="header-logo align-items-center">
+            <img style="height:42px" src="https://upload.wikimedia.org/wikipedia/commons/d/df/Logo_Metro_Rennes.svg" alt="Métro de Rennes" class="margin-logo">
+            <span class="text-uppercase">Information des transports rennais</span>
+        </a>
+        <div class="navbar">
+            <a href="#">Accueil</a>
+            <a href="./lignes/lignes.html">Arrêt en particulier</a>
+            <a href="https://troulleau.github.io">Site père</a>
+            <!-- heure actuelle -->
+            <span id="heure"></span>
+        </div>
+    </header>
+
+    <div class="content">
+        
+        <!-- Etat des lignes du metro -->
+        <div class="etat_metro"> 
+            <h1>État des lignes de métro de Rennes</h1>
+            <table id="metro-table">
+            <thead>
+                <tr>
+                    <th>Ligne</th>
+                    <th>Etat</th>
+                    <th>Dernière actualisation</th>
+                </tr>
+            </thead>
+            <tbody id="metro-info"></tbody>
+            </table>
+    
+            <button type="button" id="twitter-star-button" onclick="window.open('https://twitter.com/starendirect', '_blank')"> <svg viewBox="0 0 24 24" aria-hidden="true" class="twitter-logo"><g><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></g></svg>X (Twitter) de @starendirect
+            </button>
+        </div>
+
+        <!-- Prochains métros à Beaulieu -->
+        <div class="metro_beaulieu">
+            <h1>Prochains métros à Beaulieu (temps réel)</h1>
+            <table id="beaulieu-table" class="beaulieu-table">
+            <thead>
+                <tr>
+                    <th>Arrêt</th>
+                    <th>Destination</th>
+                    <th>Prochain train (arrivée)</th>
+                    <th>Prochain train (départ)</th>
+                    <th>2nd train (arrivée)</th>
+                    <th>2nd train (départ)</th>
+                </tr>
+            </thead>
+    
+            <tbody id="beaulieu-info"></tbody>
+            </table>
+        </div>
+
+        <!-- Dernière mise à jour -->
+        <div class="last_update">
+            <h1>Heure de la dernière mise à jour</h1>
+            <div id="last-update"></div>
+            <h1>Mise à jour automatique toutes les 2 minutes</h1>
+
+        <button id="refresh-button" type="button">Actualiser</button>
+        <script> //Actualisation des informations
+            function refreshInfos() {
+                refreshMetroInfo();
+                refreshBeaulieuInfo();
+                updatehour();
+                console.log("Refreshed");
+            }
+
+            $('#refresh-button').click(function() {
+                refreshInfos();
+            });
+
+            setInterval(function() { //Actualisation automatique toutes les 2 minutes
+                $('#refresh-button').trigger("click");
+            }, 120000);
+        </script>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-contenu">
+            <p>Source des données : STAR Data Explore/Rennes Métropole. Ce site n'est pas affilié à STAR. Il est codé intégralement par<a style="text-decoration:underline" href="https://troulleau.github.io/" target="_blank">Tom ROULLEAU</a>afin de fournir un interface clair de lecture des données fourniees par l'API. Celles-ci sont disponibles gratuitement et légalement  pour tout le monde sur<a style='text-decoration:underline' href="https://data.explore.star.fr" target="_blank">data.explore.star.fr</a></p>
+        </div>
+    </footer>
+</body>
+</html>

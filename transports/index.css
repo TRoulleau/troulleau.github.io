@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    margin: 0px;
+    background-color: blanchedalmond;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    min-height: 3.25rem;
+    width: 100%;
+    background-color: #d0cab1;
+    padding: 20px;
+}
+
+a.header-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin-right: 1.5rem!important;
+    font-weight: bold;
+}
+
+.align-items-center {
+    align-items: center!important;
+}
+
+@media (min-width: 768px) {
+    a.header-logo {
+    display: flex!important;
+    }
+}
+
+.text-uppercase {
+    text-transform: uppercase!important;
+}
+
+.margin-logo {
+    margin-right: 0.25rem!important;
+}
+
+header, a {
+    text-decoration: none;
+    color: black;
+    /* space between them */
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+.navbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+.navbar a {
+    margin: 0 2px; /* Espace entre les liens de navigation */
+    text-decoration: none;
+}
+
+.content {
+    padding: 50px 50px 50px;
+    background-color: blanchedalmond;
+}
+
+h1 {
+    font-size: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #aeaeae;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #8a8a8a;
+}
+
+#twitter-star-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.twitter-logo {
+    width: 25px;
+    margin-right: 10px;
+}
+
+#refresh-button {
+    margin-top: 10px;
+}
+
+#heure {
+    position: absolute;
+    right: 20px;
+    border-radius: 4px;
+    box-shadow: inset 3px 3px 20px 20px rgb(76 175 80);
+    padding: 0.5em 1em;
+    display: inline-block;
+    color:#ffffff;
+}
+
+
+    
+.metro-img {
+    width: 30px;
+}
+
+.etat_metro {
+    width: 50%; /* Chaque div occupe 50% de la largeur de la page */
+    float: left; /* Les div flottent à gauche */
+    box-sizing: border-box; /* Inclut la bordure et le padding dans la largeur */
+}
+
+.mtro_beaulieu {
+    width: 50%; /* Chaque div occupe 50% de la largeur de la page */
+    float: right; /* Les div flottent à gauche */
+    box-sizing: border-box; /* Inclut la bordure et le padding dans la largeur */
+}
+
+/* Optionnel : pour ajouter un peu d'espace entre les div */
+.etat_metro {
+    margin-right: 10px;
+}
+
+
+
+
+
+
+
+footer {
+    border-top: 1px dashed #000;
+    width: 100%;
+    background: #d0cab1;
+}
+
+.contenu-footer {
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 20px;
+    padding: 50px 0 100px;
+}
